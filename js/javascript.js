@@ -79,21 +79,17 @@ function judgePlayer(x,y) {//判断玩家
 function judgeChess(x,y) {//判断棋局
         var c=[];
         var sign=0;
-        c=around(x,y);
-        
+       c=aroundFind(x,y);
         if(c!==undefined){
-            sign=find(c[0],c[1],c[2],c[3]);
-            if(sign>=5){
-                if(c[1]===-1){
-                    return 'blackwin';
-                }else{
-                    return 'whitewin';
-                }
-            }else{return 'no'}
-        }else{return 'no'}
+            if(c===-1){
+                return 'blackwin';
+            }else{
+                return 'whitewin';
+            }
+        }
 }
 
-function around(row,col) {//判断当前落子周围，发现同色返回相应参数
+function aroundFind(row,col) {//判断当前落子周围，发现同色返回相应参数
     var x=row;
     var y=col;
     var now=chessbox[x][y];
@@ -108,17 +104,26 @@ function around(row,col) {//判断当前落子周围，发现同色返回相应�
     
     for(var i=0;i<around.length;i++){
         if(now===around[i]){
-            switch (i) {
-                case 0:/*alert('左斜线');*/return ['lline',now,x,y];
-                case 7:/*alert('左斜线');*/return ['lline',now,x,y];
-                case 1:/*alert('上下线');*/return ['td',now,x,y];
-                case 6:/*alert('上下线');*/return ['td',now,x,y];
-                case 2:/*alert('右斜线');*/return ['rline',now,x,y];
-                case 5:/*alert('右斜线');*/return ['rline',now,x,y];
-                case 3:/*alert('左右线');*/return ['rl',now,x,y];
-                case 4:/*alert('左右线');*/return ['rl',now,x,y];
-                default:break;
-            }
+            if(i===0||i===7){
+                if(find('lline',now,x,y)===5){
+                    return now;
+                }else{}
+            }else{}
+            if(i===1||i===6){
+                if(find('td',now,x,y)===5){
+                    return now;
+                }else{}
+            }else{}
+            if(i===2||i===5){
+                if(find('rline',now,x,y)===5){
+                    return now;
+                }else{}
+            }else{}
+            if(i===3||i===4){
+                if(find('rl',now,x,y)===5){
+                    return now;
+                }else{}
+            }else{}
         }else{}
     }
 }
@@ -133,44 +138,44 @@ function find(direction,now,row,col){//对落子周围同色方向进行搜索
         switch (direction) {
             case 'lline':
                     if(chessbox[x-1][y-1]===now){
-                        alert('左上搜索');
+                        // alert('左上搜索');
                         a=deepFind(x,y,-1,-1,now,sign);
                     }else{}
                     if(chessbox[x+1][y+1]===now){
-                        alert('右下搜索');
+                        // alert('右下搜索');
                         b=deepFind(x,y,1,1,now,sign);
                     }else{}
                 sign=1+a+b;
                 return sign;
             case 'td':
                     if(chessbox[x-1][y]===now){
-                        alert('上方搜索');
+                        // alert('上方搜索');
                         a=deepFind(x,y,-1,0,now,sign);
                     }else{} 
                     if(chessbox[x+1][y]===now){
-                        alert('下方搜索');
+                        // alert('下方搜索');
                         b=deepFind(x,y,1,0,now,sign);
                     }else{}
                 sign=1+a+b;
                 return sign;
             case 'rline':
                     if(chessbox[x-1][y+1]===now){
-                        alert('右上搜索');
+                        // alert('右上搜索');
                         a=deepFind(x,y,-1,+1,now,sign);
                     }else{}
                     if(chessbox[x+1][y-1]===now){
-                        alert('左下搜索');
+                        // alert('左下搜索');
                         b=deepFind(x,y,1,-1,now,sign);
                     }else{}
                 sign=1+a+b;
                 return sign;
             case 'rl':
                     if(chessbox[x][y-1]===now){
-                        alert('左边搜索');
+                        // alert('左边搜索');
                         a=deepFind(x,y,0,-1,now,sign);
                     }else{}
                     if(chessbox[x][y+1]===now){
-                        alert('右边搜索');
+                        // alert('右边搜索');
                         b=deepFind(x,y,0,1,now,sign);
                     }else{}
                 sign=1+a+b;
@@ -182,7 +187,7 @@ function find(direction,now,row,col){//对落子周围同色方向进行搜索
 
 function deepFind(x,y,dx,dy,now,sign) {//递归，具体对某方向进行深度搜索
     if(chessbox[x+dx][y+dy]===now){
-        alert('继续发现同色');
+        // alert('继续发现同色');
         sign++;
         return deepFind(x+dx,y+dy,dx,dy,now,sign);
     }else{
