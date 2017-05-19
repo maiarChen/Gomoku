@@ -3,11 +3,21 @@ body{
     height: 100%;
     margin: 0px;
 }
-.total{
+#total{
     background-color:white;
     width:850px;
     height:450px;
+    margin: 50px auto;
+}
+#welcome{
+    width: 200px;
+    height: 30px;
+    background-color: #DEB887;
+    text-align: center;
+    border-radius:5px;
     margin: 0px auto;
+    box-shadow: 0px 0px 10px black;
+    font-size: 20px;
 }
 #qipan{
     width:450px ;
@@ -18,11 +28,10 @@ body{
     box-shadow: 0px 0px 30px black;
 }
 .qibox{
-    width:28px ;
-    height: 28px;
+    width:30px ;
+    height: 30px;
     float: left;
     background-color: #DEB887;
-    border:1px solid black;
 }
 .playerBox{
     width: 100px;
@@ -48,14 +57,36 @@ body{
 .black{
     width: 20px;
     height: 20px;
-    margin: 5px auto;
+    margin: 5px 5px;
     border-radius:10px;
     background-color:black; 
+    position: absolute;
+    z-index: 3;
 }
 .white{
     width: 20px;
     height: 20px;
-    margin: 5px auto;
+    margin: 5px 5px;
     border-radius:10px;
-    background-color:white; 
+    background-color:white;
+    position: absolute;
+    z-index: 3; 
+}
+.tline{
+    display: block;
+    height:30px;
+    width: 2px;
+    margin:auto 14px;
+    background-color: black;
+    position: absolute;
+    z-index: 2;
+}
+.dline{
+    display: block;
+    height:2px;
+    width: 30px;
+    margin: 14px auto;
+    background-color: black;
+    position: absolute;
+    z-index: 1;
 }
